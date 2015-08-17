@@ -80,6 +80,7 @@
         compSettings.sourceMap = options.sourceMap;
         compSettings.sourceRoot = options.sourceRoot;
         compSettings.mapRoot = options.mapRoot;
+        compSettings.emitDecoratorMetadata = options.emitDecoratorMetadata;
 
         if (options.moduleKind.toLowerCase() == "amd") {
             compSettings.module = 2;

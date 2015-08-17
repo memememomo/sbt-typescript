@@ -38,6 +38,8 @@ object Import {
     val outFile = SettingKey[String]("typescript-output-file", "Concatenate and emit output to a single file.")
     val outDir = SettingKey[String]("typescript-output-directory", "Redirect output structure to the directory.")
     val removeComments = SettingKey[Boolean]("typescript-remove-comments", "Remove comments from output.")
+
+    val emitDecoratorMetadata = SettingKey[Boolean]("typescript-emit-decorator-metadata", "For AngularJS 2.0")
   }
 }
 
@@ -72,8 +74,9 @@ object SbtTypescript extends AutoPlugin {
       "outFile" -> JsString(outFile.value),
       "outDir" -> JsString(outDir.value),
       "removeComments" -> JsBoolean(removeComments.value),
-      "logLevel" -> JsString(logLevel.value.toString)
+      "logLevel" -> JsString(logLevel.value.toString),
 
+      "emitDecoratorMetadata" -> JsBoolean(emitDecoratorMetadata.value)
     ).toString()
   )
 
@@ -88,6 +91,7 @@ object SbtTypescript extends AutoPlugin {
     outFile := "",
     outDir := ((webTarget in Assets).value / "typescript").absolutePath,
     removeComments := false,
+    emitDecoratorMetadata := false,
     JsEngineKeys.parallelism := 1,
     logLevel := Level.Info
 
